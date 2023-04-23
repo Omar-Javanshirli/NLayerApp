@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NLayer.Core
 {
-    public class Product
+    public class Product:BaseEntity
     {
         public string Name { get; set; }
         public int Stock { get; set; }
