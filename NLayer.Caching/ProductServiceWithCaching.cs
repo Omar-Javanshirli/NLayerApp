@@ -26,8 +26,9 @@ namespace NLayer.Caching
             _repository = repository;
             _unitOfWork = unitOfWork;
 
+            //Result yazdigimiz zaman asixron methodu sixron edir bizde constructurda asixron istifade ede bilmediyimize gore 500 statux code error alirdix
             if (!_cache.TryGetValue(CacheProductKey, out _))
-                cache.Set(CacheProductKey, _repository.GetProductWithCategory());
+                cache.Set(CacheProductKey, _repository.GetProductWithCategory().Result);
         }
 
         public async Task<Product> AddAsync(Product entity)
