@@ -50,7 +50,7 @@ namespace NLayerRepository
                         case EntityState.Added:
                             {
                                 entityReference.CreateDate = DateTime.Now;
-                                break;
+                                break;  
                             }
                         case EntityState.Modified:
                             {
