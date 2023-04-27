@@ -54,6 +54,9 @@ namespace NLayerRepository
                             }
                         case EntityState.Modified:
                             {
+                                //update etdiyimiz zaman createDate sifiranir bu kod sifirlanmagin qarsisin alir
+                                Entry(entityReference).Property(x => x.CreateDate).IsModified = false;
+
                                 entityReference.UpdateDate = DateTime.Now;
                                 break;
                             }
