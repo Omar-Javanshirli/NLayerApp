@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace NLayerRepository.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T > where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly AppDbContext _context;
         private readonly DbSet<T> _dbSet;
@@ -57,7 +57,7 @@ namespace NLayerRepository.Repositories
 
         public IQueryable<T> Where(Expression<Func<T, bool>> expression)
         {
-           return _dbSet.Where(expression);
+            return _dbSet.Where(expression);
         }
     }
 }

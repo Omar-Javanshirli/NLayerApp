@@ -4,30 +4,25 @@ using NLayer.Core.Model;
 using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLayerService.Services
 {
-    public class ProductServicewithNoCaching : Service<Product>, IProductService
+    public class ProductService : Service<Product>, IProductService
     {
         private readonly IProductRepository _productRepo;
         private readonly IMapper _mapper;
 
-        public ProductServicewithNoCaching(IGenericRepository<Product> repository, IUnitOfWork unitOfWork, IProductRepository productRepo, IMapper mapper) : base(repository, unitOfWork)
+        public ProductService(IGenericRepository<Product> repository, IUnitOfWork unitOfWork, IProductRepository productRepo, IMapper mapper) : base(repository, unitOfWork)
         {
             _productRepo = productRepo;
             _mapper = mapper;
         }
 
-        public async Task<CustomResponseDto<List<ProductWithCatagoryDto>>> GetProductWithCategory()
+        public async Task<List<ProductWithCatagoryDto>> GetProductWithCategory()
         {
             var products = await _productRepo.GetProductWithCategory();
             var productsDto = _mapper.Map<List<ProductWithCatagoryDto>>(products);
-            return CustomResponseDto<List<ProductWithCatagoryDto>>.Success(200, productsDto);
+            return productsDto;
         }
     }
 }
