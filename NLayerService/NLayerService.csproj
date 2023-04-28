@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NLayer.Core\NLayer.Core.csproj" />
     <ProjectReference Include="..\NLayerRepository\NLayerRepository.csproj" />
   </ItemGroup>
 

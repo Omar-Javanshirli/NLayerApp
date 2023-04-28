@@ -6,12 +6,7 @@ using NLayer.Core.Model;
 using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NLayerService.Services
 {
@@ -23,6 +18,13 @@ namespace NLayerService.Services
         private readonly IGenericRepository<Entity> _repository;
         protected readonly IUnitOfWork _unitOfWork;
         protected readonly IMapper _mapper;
+
+        public ServiceWithDto(IGenericRepository<Entity> repository, IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _repository = repository;
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
 
         public async Task<CustomResponseDto<Dto>> AddAsync(Dto dto)
         {
