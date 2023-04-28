@@ -64,7 +64,6 @@ namespace NLayerWeb.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-
             var categoriesDto = await _categoryApiService.GetAllAsync();
             ViewBag.Categories = new SelectList(categoriesDto, "Id", "Name", productDto.CategoryId);
             return View(productDto);
