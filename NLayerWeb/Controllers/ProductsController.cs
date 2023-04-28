@@ -4,31 +4,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using NLayer.Core.DTOs;
 using NLayer.Core.Model;
 using NLayer.Core.Services;
+using NLayerWeb.Services;
 
 namespace NLayerWeb.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly IProductService _service;
-        private readonly ICategoryService _categoryService;
-        private readonly IMapper _mapper;
+      private readonly ProductApiService _productApiService;
+        private readonly CategoryApiService _categoryApiService;
 
-        public ProductsController(IProductService service, ICategoryService categoryService, IMapper mapper)
+        public ProductsController(ProductApiService productApiService, CategoryApiService categoryApiService)
         {
-            _service = service;
-            _categoryService = categoryService;
-            _mapper = mapper;
+            _productApiService = productApiService;
+            _categoryApiService = categoryApiService;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View((await _service.GetProductWithCategory()).Data);
+            return View(await _productApiService.GetProductsWithCategoryAsync());
         }
 
         public async Task<IActionResult> Save()
         {
-            var categories = await _categoryService.GetAllAsync();
-            var categoriesDto = _mapper.Map<List<CategoryDTO>>(categories.ToList());
+            var categoriesDto = await _categoryApiService.GetAllAsync();
             ViewBag.Categories = new SelectList(categoriesDto, "Id", "Name");
             return View();
         }
@@ -38,11 +36,10 @@ namespace NLayerWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _service.AddAsync(_mapper.Map<Product>(productDTO));
+                await _productApiService.SaveAsync(productDTO);
                 return RedirectToAction(nameof(Index));
             }
-            var categories = await _categoryService.GetAllAsync();
-            var categoriesDto = _mapper.Map<List<CategoryDTO>>(categories.ToList());
+            var categoriesDto = await _categoryApiService.GetAllAsync();
             ViewBag.Categories = new SelectList(categoriesDto, "Id", "Name");
             return View();
         }
@@ -51,12 +48,11 @@ namespace NLayerWeb.Controllers
         [ServiceFilter(typeof(NotFoundFilter<Product>))]
         public async Task<IActionResult> Update(int id)
         {
-            var products = await _service.GetByIdAsync(id);
+            var products = await _productApiService.GetByIdAsync(id);
 
-            var categories = await _categoryService.GetAllAsync();
-            var categoriesDto = _mapper.Map<List<CategoryDTO>>(categories.ToList());
+            var categoriesDto = await _categoryApiService.GetAllAsync();
             ViewBag.Categories = new SelectList(categoriesDto, "Id", "Name", products.CategoryId);
-            return View(_mapper.Map<ProductDTO>(products));
+            return View(products);
         }
 
         [HttpPost]
@@ -64,21 +60,19 @@ namespace NLayerWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _service.UpdateAsync(_mapper.Map<Product>(productDto));
+                await _productApiService.UpdateAsync(productDto);
                 return RedirectToAction(nameof(Index));
             }
 
 
-            var categories = await _categoryService.GetAllAsync();
-            var categoriesDto = _mapper.Map<List<CategoryDTO>>(categories.ToList());
+            var categoriesDto = await _categoryApiService.GetAllAsync();
             ViewBag.Categories = new SelectList(categoriesDto, "Id", "Name", productDto.CategoryId);
             return View(productDto);
         }
 
         public async Task<IActionResult> Remove(int id)
         {
-            var product = await _service.GetByIdAsync(id);
-            await _service.RemoveAsync(product);
+            await _productApiService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }
