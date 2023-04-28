@@ -27,9 +27,11 @@ namespace NLayerService.Services
             return CustomResponseDto<ProductDTO>.Success(StatusCodes.Status200OK, newDto);
         }
 
-        public Task<CustomResponseDto<List<ProductWithCatagoryDto>>> GetProductWithCategory()
+        public async Task<CustomResponseDto<List<ProductWithCatagoryDto>>> GetProductWithCategory()
         {
-            throw new NotImplementedException();
+            var products = await _productService.GetProductWithCategory();
+            var productsDto = _mapper.Map<List<ProductWithCatagoryDto>>(products);
+            return CustomResponseDto<List<ProductWithCatagoryDto>>.Success(StatusCodes.Status200OK, productsDto);
         }
 
         public async Task<CustomResponseDto<NoContentDto>> UpdateAsync(ProductUpdateDTO dto)
