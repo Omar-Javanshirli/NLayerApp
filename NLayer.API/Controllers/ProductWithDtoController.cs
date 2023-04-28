@@ -67,7 +67,7 @@ namespace NLayer.API.Controllers
             return CreateActionResult(await _productServiceWithDto.RemoveRangeAsync(ids));
         }
 
-        [HttpDelete("Any/{id}")]
+        [HttpGet("Any/{id}")]
         public async Task<IActionResult> Any(int id)
         {
             return CreateActionResult(await _productServiceWithDto.AnyAsync(x => x.Id == id));
