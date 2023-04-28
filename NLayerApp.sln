@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NLayer.API", "NLayer.API\NL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NLayer.Caching", "NLayer.Caching\NLayer.Caching.csproj", "{04364DB7-4C16-4D44-9237-26F4D39C0970}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLayerWeb", "NLayerWeb\NLayerWeb.csproj", "{E4A03AC1-8760-4D54-9A01-AEC43F02C179}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NLayerWeb", "NLayerWeb\NLayerWeb.csproj", "{E4A03AC1-8760-4D54-9A01-AEC43F02C179}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{40168545-FA8F-41F9-8993-57B11AC73B61}"
+	ProjectSection(SolutionItems) = preProject
+		Ports.txt = Ports.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
