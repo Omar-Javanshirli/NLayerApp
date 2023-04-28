@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace NLayer.Core.Services
 {
-    public interface IProductServiceWithDto:IServiceWithDto<Product,ProductDTO>
+    public interface IProductServiceWithDto : IServiceWithDto<Product, ProductDTO>
     {
         Task<CustomResponseDto<List<ProductWithCatagoryDto>>> GetProductWithCategory();
-        Task<CustomResponseDto<NoContentDto>>UpdateAsync(ProductUpdateDTO dto);
+        Task<CustomResponseDto<NoContentDto>> UpdateAsync(ProductUpdateDTO dto);
         Task<CustomResponseDto<ProductDTO>> AddAsync(ProductCreateDto dto);
     }
 }
