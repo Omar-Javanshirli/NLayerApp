@@ -19,7 +19,7 @@ namespace NLayer.Core.Services
         Task<CustomResponseDto<Dto>> AddAsync(Dto dto);
         Task<CustomResponseDto<IEnumerable<Dto>>> AddRangeAsync(IEnumerable<Dto> dtos);
         Task<CustomResponseDto<NoContentDto>> UpdateAsync(Dto dto);
-        Task<CustomResponseDto<NoContentDto>> RemoveAsync(Dto dto);
+        Task<CustomResponseDto<NoContentDto>> RemoveAsync(int id);
         Task<CustomResponseDto<NoContentDto>> RemoveRangeAsync(IEnumerable<int> ids);
     }
 }
